@@ -32,7 +32,7 @@ h2{font-size:2rem;margin-bottom:28px}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
 .book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
-.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
 .cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
 .card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
@@ -45,58 +45,119 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
 @media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
 
 .add{display:flex;flex-wrap:wrap;gap:10px}
-.add input{flex:1 1 180px;padding:12px 14px;background:var(--card);color:var(--fg);border:1px solid var(--line);font:inherit}
-.add input:focus{outline:none;border-color:var(--gold)}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
 .vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
 .vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
 .cnt{font-size:1.6rem;color:var(--gold)}
 .adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
-.adm .card{margin-bottom:12px}
+.adm .card{margin-bottom:18px}
 .adm .vb{margin:10px 10px 0 0}
 .adm-bar{margin-top:28px;text-align:right}
 .adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
 .adm-toggle:hover{color:var(--gold)}
 
-/* intro */
-#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb}
-#intro .half{position:absolute;left:0;right:0;height:50%;background:#000;transition:transform 1.4s cubic-bezier(.7,0,.2,1)}
-#intro .top{top:0}#intro .bot{bottom:0}
-#intro.open .top{transform:translateY(-101%)}#intro.open .bot{transform:translateY(101%)}
-#intro .st{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
-#intro.open .st{display:none}
-#s0{position:absolute;inset:0;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;text-align:center}
-#intro.open #s0{display:none}
-#s0 span{display:block;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(2.4rem,13vw,7rem);text-transform:uppercase;letter-spacing:.04em;padding:0 16px;text-shadow:4px 4px 0 rgba(0,0,0,.45)}
-.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;animation:flw .6s 3s ease-out}
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
+
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
+
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
 @keyframes flw{0%{opacity:.95}100%{opacity:0}}
-@keyframes draw{to{width:min(70vw,520px)}}
-#s1{animation:fade 1.9s 3s forwards}
-#s1 b{font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.5rem,6.5vw,3.4rem);letter-spacing:.08em;color:#fff;background:#b3001b;border:2px solid #d4ad55;padding:.25em .6em;animation:slam .7s 3s both}
-@keyframes slam{0%{transform:scale(2.4);opacity:0}30%{transform:scale(.95);opacity:1}45%{transform:scale(1.04)}60%,100%{transform:scale(1)}}
-#s2{animation:fade 1.8s 4.8s forwards;font-style:italic;font-size:clamp(1.1rem,3.5vw,1.8rem);letter-spacing:.08em}
-#s3{animation:fade 2.2s 6.4s forwards}
-#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.8rem}
-#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5rem);margin-top:12px;animation:settle 2.2s 6.4s forwards}
-@keyframes settle{from{transform:scale(1.18)}to{transform:scale(1)}}
-@keyframes fade{0%{opacity:0}25%{opacity:1}75%{opacity:1}100%{opacity:0}}
-#skip{position:absolute;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:2;background:none;border:1px solid #d4ad55;color:#d4ad55;padding:8px 16px;font:inherit;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
-#skip:hover{background:#d4ad55;color:#000}
+
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
+
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
+
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
+
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div id="intro" aria-label="Intro">
   <div class="half top"></div><div class="half bot"></div>
-  <div id="s0"><span></span></div>
-  <div class="st" id="s1"><b>SID LITERARY CORNER</b></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
+
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
+
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
   <div class="st" id="s2">Every book is a destination.</div>
-  <div class="st" id="s3"><small>NOW READING</small><b>THE SILENT PATIENT</b></div>
-  <div class="fl"></div>
-  <button id="skip" type="button">Skip intro</button>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
+
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
 </div>
 
 <div id="page" class="wrap">
-  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#join">Join</a></div></nav>
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
   <header class="hero">
     <span class="l eyebrow">A book club</span>
     <h1 class="l">Every book is<br>a destination.</h1>
@@ -107,11 +168,12 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
   <section id="reading" class="reveal">
     <h2>Now reading</h2>
     <div class="book">
-      <div class="cover">THE SILENT PATIENT<small>CURRENT PICK</small></div>
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
       <div>
-        <p class="tag">This month&rsquo;s book</p>
-        <h3 style="font-size:1.8rem;margin-bottom:10px">The Silent Patient</h3>
-        <p style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
       </div>
     </div>
   </section>
@@ -119,7 +181,7 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
   <section id="meet" class="reveal">
     <h2>Meetings</h2>
     <div class="grid">
-      <div class="card"><p class="tag">Next meeting</p><h3>Every Saturday &middot; 7 PM</h3><p>Tonight (Sat, 14 Nov) we discuss The Silent Patient, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
       <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
       <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
     </div>
@@ -128,7 +190,7 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
   <section id="shelf" class="reveal">
     <h2>Our shelf</h2>
     <div class="grid">
-      <div class="card"><p class="tag">Reading now</p><h3>The Silent Patient</h3><p>Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
       <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
       <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
     </div>
@@ -153,6 +215,58 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
     </div>
   </section>
 
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
+
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
   <section id="join" class="reveal" style="text-align:center">
     <h2>Join Sid Literary Corner</h2>
     <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
@@ -161,232 +275,1425 @@ footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border
   <footer>&copy; Sid Literary Corner</footer>
 </div>
 
-<!-- Intro & Scroll Animations -->
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
 <script>
 (function(){
-  var intro=document.getElementById('intro'),done=false;
-  function finish(){
-    if(done)return;done=true;
-    document.body.classList.add('go');
-    intro.classList.add('open');
-    document.getElementById('skip').style.display='none';
-    setTimeout(function(){intro.remove()},1600);
-  }
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){intro.remove();document.body.classList.add('go');}
-  else{
-    document.body.style.overflow='hidden';
-    var s0=document.getElementById('s0'),words=['Mystery','Romance','Thriller','Fantasy','History','Poetry','Adventure','Classics','Drama','Sci-Fi','Horror','Novels','Your next read'],pal=[['#b3001b','#fff'],['#111','#d4ad55'],['#d4ad55','#111'],['#fff','#b3001b'],['#1b2a49','#fff']],wi=0;
-    function tick(){
-      if(done||wi>=words.length){s0.style.display='none';return}
-      var p=pal[wi%pal.length],sp=s0.firstChild;
-      s0.style.background='radial-gradient(circle,rgba(0,0,0,.25) 1.5px,transparent 2px) 0 0/10px 10px,'+p[0];
-      s0.style.color=p[1];sp.textContent=words[wi];
-      sp.style.transform='rotate('+((wi%2?-1:1)*(2+wi%4))+'deg) scale('+(1+wi*0.02)+')';
-      wi++;setTimeout(tick,Math.max(130,260-wi*10));
-    }
-    setTimeout(tick,300);
-    setTimeout(function(){s0.style.display='none'},3000);
-    var t=setTimeout(finish,8300);
-    document.getElementById('skip').onclick=function(){clearTimeout(t);finish();};
-    setTimeout(function(){document.body.style.overflow=''},10000);
-  }
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-})();
-</script>
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{text-decoration:none;margin-left:20px;color:var(--mut)}
+nav a:hover{color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
 
-<!-- Firebase Firestore Only (No Authentication Required) -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+.adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
+.adm .card{margin-bottom:18px}
+.adm .vb{margin:10px 10px 0 0}
+.adm-bar{margin-top:28px;text-align:right}
+.adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.adm-toggle:hover{color:var(--gold)}
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA5X__e0IjtlNat75F7QiI5lMLl3LwykJw",
-    authDomain: "sid-literary-corner.firebaseapp.com",
-    projectId: "sid-literary-corner",
-    storageBucket: "sid-literary-corner.firebasestorage.app",
-    messagingSenderId: "658297927",
-    appId: "1:658297927:web:ed4657f633429d5d0c0d62",
-    measurementId: "G-697SFG26LH"
-  };
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
 
-  // =========================================================================
-  // CHANGE YOUR ADMIN PIN BELOW
-  // =========================================================================
-  const ADMIN_PIN = "sid2026";
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
 
-  const note = document.getElementById('vote-note');
-  const live = document.getElementById('vote-live');
-  const list = document.getElementById('blist');
-  const admBtn = document.getElementById('adm-btn');
-  const admBox = document.getElementById('admin');
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
 
-  // Generate or load a unique ID in the visitor's browser (no login required)
-  let uid = localStorage.getItem('slc_uid');
-  if (!uid) {
-    uid = 'user_' + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
-    localStorage.setItem('slc_uid', uid);
-  }
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
 
-  let isAdmin = false;
-  let books = [];
-  let votes = {};
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
+@keyframes flw{0%{opacity:.95}100%{opacity:0}}
 
-  function el(tag, cls, text) {
-    const e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
 
-  admBtn.onclick = () => {
-    if (isAdmin) {
-      isAdmin = false;
-      renderAdmin();
-      return;
-    }
-    const pin = prompt("Enter Admin PIN:");
-    if (pin === ADMIN_PIN) {
-      isAdmin = true;
-      renderAdmin();
-    } else if (pin !== null) {
-      alert("Incorrect PIN.");
-    }
-  };
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
 
-  function render() {
-    const tally = {};
-    Object.values(votes).forEach(v => {
-      tally[v.bookId] = (tally[v.bookId] || 0) + 1;
-    });
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
 
-    const rows = books.slice().sort((a, b) => (tally[b.id] || 0) - (tally[a.id] || 0) || a.created - b.created);
-    list.textContent = '';
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div class="half top"></div><div class="half bot"></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
 
-    if (!rows.length) {
-      list.appendChild(el('p', null, 'No recommendations yet. Be the first!'));
-    } else {
-      rows.forEach(b => {
-        const c = el('div', 'card');
-        const mine = votes[uid] && votes[uid].bookId === b.id;
-        c.appendChild(el('div', 'cnt', String(tally[b.id] || 0)));
-        c.appendChild(el('h3', null, b.title));
-        if (b.author) c.appendChild(el('p', null, b.author));
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
 
-        const v = el('button', 'vb' + (mine ? ' on' : ''), mine ? 'Voted' : 'Vote');
-        v.type = 'button';
-        v.onclick = () => {
-          const myName = document.getElementById('uname').value.trim() || 'Member';
-          const ref = doc(db, 'votes', uid);
-          if (mine) {
-            deleteDoc(ref).catch(err => alert('Error: ' + err.message));
-          } else {
-            setDoc(ref, { bookId: b.id, voterName: myName }).catch(err => alert('Error: ' + err.message));
-          }
-        };
-        c.appendChild(v);
-        list.appendChild(c);
-      });
-    }
-    renderAdmin();
-  }
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
+  <div class="st" id="s2">Every book is a destination.</div>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
 
-  function renderAdmin() {
-    if (!isAdmin) {
-      admBox.hidden = true;
-      admBtn.textContent = 'Admin Login';
-      return;
-    }
-    admBtn.textContent = 'Exit Admin Mode';
-    admBox.hidden = false;
-    admBox.textContent = '';
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+</div>
 
-    const nv = Object.keys(votes).length;
-    admBox.appendChild(el('h3', null, 'Admin View'));
-    admBox.appendChild(el('p', null, `${books.length} recommendation(s), ${nv} vote(s) cast.`));
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
 
-    books.forEach(b => {
-      const c = el('div', 'card');
-      const voters = Object.values(votes)
-        .filter(v => v.bookId === b.id)
-        .map(v => v.voterName || 'Member');
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
 
-      c.appendChild(el('h3', null, b.title + (b.author ? ' — ' + b.author : '')));
-      c.appendChild(el('p', null, 'Recommended by: ' + (b.recommender || 'Member')));
-      c.appendChild(el('p', null, 'Votes: ' + voters.length + (voters.length ? ' (' + voters.join(', ') + ')' : '')));
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
 
-      const d = el('button', 'vb', 'Delete Book');
-      d.type = 'button';
-      d.onclick = () => {
-        deleteDoc(doc(db, 'books', b.id)).catch(err => alert('Error: ' + err.message));
-      };
-      c.appendChild(d);
-      admBox.appendChild(c);
-    });
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
 
-    const rs = el('button', 'vb', 'Reset all votes');
-    rs.type = 'button';
-    let armed = false;
-    rs.onclick = () => {
-      if (!armed) {
-        armed = true;
-        rs.textContent = 'Click again to confirm';
-        return;
-      }
-      Object.keys(votes).forEach(k => {
-        deleteDoc(doc(db, 'votes', k)).catch(console.error);
-      });
-      armed = false;
-      rs.textContent = 'Reset all votes';
-    };
-    admBox.appendChild(rs);
-  }
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite. One vote each, and you can change it any time. You can recommend one book each; adding another replaces your earlier pick.</p>
+    <div id="vote-note" class="card" style="margin-bottom:18px"><p>Connecting to the live voting board&hellip;</p></div>
+    <div id="vote-live" hidden>
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px"></div>
+      <div class="adm-bar">
+        <button id="adm-btn" type="button" class="adm-toggle">Admin Login</button>
+      </div>
+      <div id="admin" class="adm" hidden></div>
+    </div>
+  </section>
 
-  let connected = false;
-  function showBoard() {
-    if (!connected) {
-      connected = true;
-      note.hidden = true;
-      live.hidden = false;
-    }
-  }
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
 
-  onSnapshot(collection(db, 'books'), (snap) => {
-    books = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    showBoard();
-    render();
-  }, (err) => {
-    note.querySelector('p').textContent = "Database connection error: " + err.message;
-  });
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
 
-  onSnapshot(collection(db, 'votes'), (snap) => {
-    votes = {};
-    snap.docs.forEach(d => { votes[d.id] = d.data(); });
-    showBoard();
-    render();
-  });
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
 
-  document.getElementById('badd').onclick = () => {
-    const t = document.getElementById('bt');
-    const a = document.getElementById('ba');
-    const u = document.getElementById('uname');
-    const title = t.value.trim();
-    if (!title) return;
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
 
-    setDoc(doc(db, 'books', uid), {
-      title: title.slice(0, 80),
-      author: a.value.trim().slice(0, 60),
-      recommender: u.value.trim().slice(0, 40) || 'Member',
-      created: Date.now()
-    }).then(() => {
-      t.value = '';
-      a.value = '';
-    }).catch(err => alert('Could not save: ' + err.message));
-  };
-</script>
-</body>
-</html>
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
+<script>
+(function(){
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{text-decoration:none;margin-left:20px;color:var(--mut)}
+nav a:hover{color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
+
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+.adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
+.adm .card{margin-bottom:18px}
+.adm .vb{margin:10px 10px 0 0}
+.adm-bar{margin-top:28px;text-align:right}
+.adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.adm-toggle:hover{color:var(--gold)}
+
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
+
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
+
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
+@keyframes flw{0%{opacity:.95}100%{opacity:0}}
+
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
+
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
+
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
+
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div class="half top"></div><div class="half bot"></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
+
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
+
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
+  <div class="st" id="s2">Every book is a destination.</div>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
+
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+</div>
+
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
+
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
+
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
+
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite. One vote each, and you can change it any time. You can recommend one book each; adding another replaces your earlier pick.</p>
+    <div id="vote-note" class="card" style="margin-bottom:18px"><p>Connecting to the live voting board&hellip;</p></div>
+    <div id="vote-live" hidden>
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px"></div>
+      <div class="adm-bar">
+        <button id="adm-btn" type="button" class="adm-toggle">Admin Login</button>
+      </div>
+      <div id="admin" class="adm" hidden></div>
+    </div>
+  </section>
+
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
+
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
+
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
+<script>
+(function(){
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{text-decoration:none;margin-left:20px;color:var(--mut)}
+nav a:hover{color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
+
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+.adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
+.adm .card{margin-bottom:18px}
+.adm .vb{margin:10px 10px 0 0}
+.adm-bar{margin-top:28px;text-align:right}
+.adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.adm-toggle:hover{color:var(--gold)}
+
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
+
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
+
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
+@keyframes flw{0%{opacity:.95}100%{opacity:0}}
+
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
+
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
+
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
+
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div class="half top"></div><div class="half bot"></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
+
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
+
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
+  <div class="st" id="s2">Every book is a destination.</div>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
+
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+</div>
+
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
+
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
+
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
+
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite. One vote each, and you can change it any time. You can recommend one book each; adding another replaces your earlier pick.</p>
+    <div id="vote-note" class="card" style="margin-bottom:18px"><p>Connecting to the live voting board&hellip;</p></div>
+    <div id="vote-live" hidden>
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px"></div>
+      <div class="adm-bar">
+        <button id="adm-btn" type="button" class="adm-toggle">Admin Login</button>
+      </div>
+      <div id="admin" class="adm" hidden></div>
+    </div>
+  </section>
+
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
+
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
+
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
+<script>
+(function(){
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{text-decoration:none;margin-left:20px;color:var(--mut)}
+nav a:hover{color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
+
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+.adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
+.adm .card{margin-bottom:18px}
+.adm .vb{margin:10px 10px 0 0}
+.adm-bar{margin-top:28px;text-align:right}
+.adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.adm-toggle:hover{color:var(--gold)}
+
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
+
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
+
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
+@keyframes flw{0%{opacity:.95}100%{opacity:0}}
+
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
+
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
+
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
+
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div class="half top"></div><div class="half bot"></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
+
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
+
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
+  <div class="st" id="s2">Every book is a destination.</div>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
+
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+</div>
+
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
+
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
+
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
+
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite. One vote each, and you can change it any time. You can recommend one book each; adding another replaces your earlier pick.</p>
+    <div id="vote-note" class="card" style="margin-bottom:18px"><p>Connecting to the live voting board&hellip;</p></div>
+    <div id="vote-live" hidden>
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px"></div>
+      <div class="adm-bar">
+        <button id="adm-btn" type="button" class="adm-toggle">Admin Login</button>
+      </div>
+      <div id="admin" class="adm" hidden></div>
+    </div>
+  </section>
+
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
+
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
+
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
+<script>
+(function(){
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{text-decoration:none;margin-left:20px;color:var(--mut)}
+nav a:hover{color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{margin-left:12px}}
+
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.adm-form input,.adm-form textarea,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.adm-form input:focus,.adm-form textarea:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.adm-form,.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+.adm{margin-top:44px;padding-top:26px;border-top:1px dashed var(--gold)}
+.adm .card{margin-bottom:18px}
+.adm .vb{margin:10px 10px 0 0}
+.adm-bar{margin-top:28px;text-align:right}
+.adm-toggle{background:none;border:none;color:var(--mut);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.adm-toggle:hover{color:var(--gold)}
+
+/* TVA Badge Card Generator */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Marvel-Style Comic Flipbook Intro */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none}
+#intro .half{position:absolute;left:0;right:0;height:50%;background:#080605;transition:transform 1.35s cubic-bezier(.75,0,.2,1);z-index:1}
+#intro .top{top:0;border-bottom:1px solid rgba(212,173,85,.25)}
+#intro .bot{bottom:0;border-top:1px solid rgba(212,173,85,.25)}
+#intro.open .top{transform:translateY(-102%)}
+#intro.open .bot{transform:translateY(102%)}
+
+.cinema-bar{position:absolute;left:0;right:0;height:clamp(28px,6vh,54px);background:#000;z-index:5;transition:transform .8s ease}
+.cinema-bar.t{top:0}.cinema-bar.b{bottom:0}
+#intro.open .cinema-bar.t{transform:translateY(-100%)}
+#intro.open .cinema-bar.b{transform:translateY(100%)}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:900px;transition:opacity .7s ease,filter .7s ease}
+#intro.open #flipbook,#intro.open .st,#intro.open .vignette{display:none}
+.page-panel{position:absolute;inset:-8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;padding:24px;transform:rotate(-4deg) scale(1.08);opacity:.95}
+.comic-cell{border:3px solid #111;display:flex;flex-direction:column;justify-content:space-between;padding:14px;font-family:Impact,"Arial Narrow",Arial,sans-serif;text-transform:uppercase;box-shadow:inset 0 0 24px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.comic-cell::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(0,0,0,.22) 1.2px,transparent 1.5px) 0 0/7px 7px;pointer-events:none}
+.comic-cell .issue{font-family:Georgia,serif;font-size:.65rem;letter-spacing:.25em;opacity:.85}
+.comic-cell .word{font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.03em;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+.comic-cell .sub{font-family:Georgia,serif;font-style:italic;font-size:.75rem;text-transform:none;opacity:.9}
+
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(0,0,0,.85) 100%);transition:background .8s ease}
+#intro.crimson .vignette{background:radial-gradient(circle,rgba(179,0,27,.45) 15%,rgba(95,0,12,.92) 100%)}
+#intro.crimson #flipbook{opacity:.28;filter:contrast(1.4) saturate(1.5) sepia(.4) hue-rotate(-35deg)}
+
+.fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+.fl.bang{animation:flw .55s ease-out}
+@keyframes flw{0%{opacity:.95}100%{opacity:0}}
+
+.st{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:24px;pointer-events:none}
+
+#s1{animation:marvelTitle 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+.marvel-box{position:relative;background:linear-gradient(180deg,#d90429 0%,#9b0014 100%);border:3px solid #f5d076;padding:.28em .72em;box-shadow:0 18px 50px rgba(0,0,0,.85),inset 0 0 22px rgba(255,215,120,.25);overflow:hidden}
+.marvel-box::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:sheen 1.4s 3.1s ease-out forwards}
+#s1 b{display:block;font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(1.8rem,7.2vw,4.3rem);letter-spacing:.09em;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.6);animation:zoomPull 2.8s 2.5s cubic-bezier(.16,1,.3,1) forwards}
+#s1 small{display:block;margin-top:14px;font-family:Georgia,serif;letter-spacing:.45em;font-size:clamp(.65rem,2vw,.85rem);color:#f5d076;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@keyframes marvelTitle{0%{opacity:0}12%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes zoomPull{0%{transform:scale(2.3);letter-spacing:.22em}22%{transform:scale(1.02);letter-spacing:.09em}85%{transform:scale(.96)}100%{transform:scale(.9)}}
+@keyframes sheen{to{left:160%}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(4px,3px)}}
+#intro.shake{animation:shake .38s ease-out}
+
+#s2{animation:fade 1.7s 5.2s forwards;font-style:italic;font-size:clamp(1.2rem,3.8vw,2rem);letter-spacing:.08em;color:#f1eadb;text-shadow:0 4px 18px rgba(0,0,0,.9)}
+#s3{animation:fade 2.4s 6.8s forwards}
+#s3 small{color:#d4ad55;letter-spacing:.5em;font-size:.82rem;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+#s3 b{font-weight:400;font-size:clamp(2.2rem,9vw,5.2rem);margin-top:12px;animation:settle 2.4s 6.8s forwards;text-transform:uppercase;transition:opacity .3s;text-shadow:0 6px 28px rgba(212,173,85,.35)}
+@keyframes settle{from{transform:scale(1.22);letter-spacing:.14em}to{transform:scale(1);letter-spacing:.04em}}
+@keyframes fade{0%{opacity:0}22%{opacity:1}78%{opacity:1}100%{opacity:0}}
+
+.intro-ctrl{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:rgba(12,10,8,.78);border:1px solid #d4ad55;color:#d4ad55;padding:8px 14px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#snd-btn{left:calc(20px + env(safe-area-inset-left,0px))}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<!-- html2canvas library for card image download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div class="half top"></div><div class="half bot"></div>
+  <div class="cinema-bar t"></div><div class="cinema-bar b"></div>
+
+  <div id="flipbook"><div class="page-panel" id="panels"></div></div>
+  <div class="vignette"></div>
+
+  <div class="st" id="s1">
+    <div class="marvel-box"><b>SID LITERARY CORNER</b></div>
+    <small>PRESENTS &bull; WEEKLY BOOK CLUB</small>
+  </div>
+  <div class="st" id="s2">Every book is a destination.</div>
+  <div class="st" id="s3"><small>NOW READING</small><b id="intro-book" style="opacity:0">THE SILENT PATIENT</b></div>
+
+  <div class="fl" id="flash"></div>
+  <button id="snd-btn" class="intro-ctrl" type="button">Sound: Tap for Audio</button>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+</div>
+
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
+
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
+
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
+
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite. One vote each, and you can change it any time. You can recommend one book each; adding another replaces your earlier pick.</p>
+    <div id="vote-note" class="card" style="margin-bottom:18px"><p>Connecting to the live voting board&hellip;</p></div>
+    <div id="vote-live" hidden>
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px"></div>
+      <div class="adm-bar">
+        <button id="adm-btn" type="button" class="adm-toggle">Admin Login</button>
+      </div>
+      <div id="admin" class="adm" hidden></div>
+    </div>
+  </section>
+
+  <!-- TVA Member Card Generator Section -->
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Time Variance Authority (TVA) literary ID card for Sid Literary Corner. Fill in your details below and download your card as a PNG image!</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate TVA Card</button>
+      </div>
+
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">TIME VARIANCE AUTHORITY</div>
+              <div class="tva-logo">LIT-CORNER ID</div>
+            </div>
+            <div class="tva-seal">SLC<br>TVA</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row">
+              <div class="tva-label">DESIGNATION</div>
+              <div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">SACRED BOOK</div>
+              <div id="cv-book" class="tva-val">The Silent Patient</div>
+            </div>
+            <div class="tva-row">
+              <div class="tva-label">CORE QUOTE</div>
+              <div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div>
+            </div>
+          </div>
+          <div class="tva-footer">
+            <div>
+              <div style="font-size:.55rem;color:#a89e8c">VARIANT ID</div>
+              <div style="font-family:monospace;letter-spacing:1px">SLC-784-99</div>
+            </div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
+
+<!-- Marvel Flipbook Intro + Cinematic Web Audio Synthesizer -->
+<script>
+(function(){
+  try {
+    var cached = JSON.parse(localStorage.getItem('slc_now_reading'));
+    if (cached && cached.title) {
+      var ib = document.getElementById('intro-book')
