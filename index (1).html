@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sid Literary Corner</title>
+<style>
+:root{--bg:#faf6ee;--fg:#1d1a16;--mut:#6b6358;--card:#fff;--gold:#b8923a;--line:#e6dcc8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}}
+:root[data-theme="dark"]{--bg:#14110d;--fg:#f1eadb;--mut:#a89e8c;--card:#1e1a14;--gold:#d4ad55;--line:#2e2820}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+h1,h2,h3{font-weight:400;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;gap:8px}
+nav div{display:flex;flex-wrap:wrap;gap:8px}
+nav a{text-decoration:none;margin-left:0;color:var(--mut);border:1px solid var(--line);padding:6px 12px;font-size:.7rem;letter-spacing:.15em;background:var(--card);transition:.25s}
+nav a:hover{color:var(--gold);border-color:var(--gold)}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.hero .l{display:block;opacity:0;transform:translateY(30px)}
+.go .hero .l{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.go .hero .l:nth-child(2){animation-delay:.25s}.go .hero .l:nth-child(3){animation-delay:.5s}.go .hero .l:nth-child(4){animation-delay:.75s}
+.eyebrow{color:var(--gold);letter-spacing:.35em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.05;margin:14px 0}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.btn{display:inline-block;margin-top:24px;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-size:2rem;margin-bottom:28px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+.book{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1d1a16,#3a2f1d);border:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px;color:#f1eadb;font-size:1.2rem;letter-spacing:.1em;animation:float 5s ease-in-out infinite;text-transform:uppercase}
+.cover small{color:#d4ad55;letter-spacing:.3em;font-size:.65rem;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:1.1rem;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:.95rem}
+.tag{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(max-width:640px){.book{grid-template-columns:1fr}.cover{max-width:180px}nav a{padding:6px 10px;letter-spacing:.1em}}
+
+.add{display:flex;flex-wrap:wrap;gap:10px}
+.add input,.card-form input,.card-form textarea{padding:12px 14px;background:var(--bg);color:var(--fg);border:1px solid var(--line);font:inherit;width:100%}
+.add input{flex:1 1 180px;background:var(--card)}
+.add input:focus,.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--gold)}
+.card-form{display:grid;gap:12px;margin-top:14px}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr}}
+.vb{margin-top:14px;padding:8px 16px;border:1px solid var(--gold);background:none;color:var(--gold);font:inherit;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+.vb.on,.vb:hover{background:var(--gold);color:var(--bg)}
+.cnt{font-size:1.6rem;color:var(--gold)}
+
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.tva-card{width:100%;max-width:440px;background:#181512;color:#f5eeda;border:3px solid #d4ad55;padding:24px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.35);font-family:Georgia,serif;overflow:hidden}
+.tva-card::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(212,173,85,.08) 1.5px,transparent 2px) 0 0/10px 10px;pointer-events:none}
+.tva-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4ad55;padding-bottom:12px;margin-bottom:16px}
+.tva-logo{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:1.5rem;letter-spacing:.15em;color:#d4ad55}
+.tva-seal{width:42px;height:42px;border:2px solid #d4ad55;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.1em;color:#d4ad55;text-align:center;font-weight:bold}
+.tva-body{display:grid;gap:12px;font-size:.9rem}
+.tva-row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.tva-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#d4ad55;padding-top:2px}
+.tva-val{font-weight:normal;word-break:break-word}
+.tva-quote{font-style:italic;color:#e8dfcb;border-left:2px solid #d4ad55;padding-left:10px;margin-top:4px}
+.tva-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed rgba(212,173,85,.4);padding-top:14px;margin-top:16px;font-size:.7rem;letter-spacing:.15em;color:#a89e8c}
+.tva-barcode{font-family:'Courier New',Courier,monospace;letter-spacing:3px;font-size:1rem;color:#d4ad55}
+
+/* Intro Cinematic Overhaul */
+#intro{position:fixed;inset:0;z-index:100;font-family:Georgia,serif;color:#f1eadb;overflow:hidden;background:#080605}
+#intro.open{background:transparent;pointer-events:none;transition:background .6s ease}
+#intro.gone{display:none}
+
+#sign-container{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;transition:transform 1.4s cubic-bezier(0.77,0,0.175,1),opacity 1s ease}
+.glowing-sign{background:radial-gradient(circle, rgba(30,24,16,0.95) 0%, rgba(10,8,6,0.98) 100%);border:3px solid var(--gold);padding:35px 50px;box-shadow:0 0 45px rgba(184,146,58,0.4), inset 0 0 25px rgba(184,146,58,0.2);position:relative;animation:signPulse 3s ease-in-out infinite}
+.glowing-sign h2{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(2.2rem,6vw,4.5rem);letter-spacing:.15em;color:var(--gold);text-transform:uppercase;text-shadow:0 0 15px rgba(184,146,58,0.8), 0 0 30px rgba(184,146,58,0.4);margin:0}
+.glowing-sign p{margin:10px 0 0;font-size:clamp(.75rem,2vw,1rem);letter-spacing:.4em;color:#f5eeda;text-transform:uppercase}
+@keyframes signPulse{0%,100%{box-shadow:0 0 35px rgba(184,146,58,0.3), inset 0 0 20px rgba(184,146,58,0.15)}50%{box-shadow:0 0 55px rgba(184,146,58,0.6), inset 0 0 35px rgba(184,146,58,0.3)}}
+
+#intro.zoom-in #sign-container{transform:scale(8);opacity:0;pointer-events:none}
+
+#flipbook{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:0;transition:opacity .8s ease}
+#intro.show-books #flipbook{opacity:1}
+.book-slide{position:absolute;width:min(80vw,500px);background:var(--card);border:2px solid var(--gold);padding:40px 30px;text-align:center;box-shadow:0 15px 50px rgba(0,0,0,0.7);transform:scale(0.8);opacity:0;transition:transform .5s cubic-bezier(0.2,0.8,0.2,1),opacity .5s ease}
+.book-slide.active{transform:scale(1);opacity:1}
+.book-slide span{display:block;color:var(--gold);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:10px}
+.book-slide h3{font-size:clamp(1.5rem,3.5vw,2.2rem);margin-bottom:8px;color:var(--fg)}
+.book-slide p{font-style:italic;color:var(--mut);margin:0;font-size:1rem}
+
+.vignette{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(circle,transparent 35%,rgba(0,0,0,0.88) 100%)}
+.intro-ctrl{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:20;background:rgba(12,10,8,.85);border:1px solid #d4ad55;color:#d4ad55;padding:10px 18px;font:inherit;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.25s}
+.intro-ctrl:hover{background:#d4ad55;color:#000}
+#skip{right:calc(20px + env(safe-area-inset-right,0px))}
+
+#gate{position:absolute;inset:0;z-index:30;background:#080605;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;transition:opacity .6s}
+#gate small{color:#d4ad55;letter-spacing:.45em;font-size:.75rem}
+#gate b{font-weight:400;font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:clamp(2rem,8vw,3.6rem);letter-spacing:.08em;color:#fff}
+#gate p{margin:0 0 10px;color:#a89e8c;font-style:italic}
+#gate .intro-ctrl{position:static;min-width:250px;padding:13px 18px}
+#gate.hide{opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="intro" aria-label="Intro">
+  <div id="sign-container">
+    <div class="glowing-sign">
+      <h2>Sid Literary Corner</h2>
+      <p>Top 30 Classics Collection</p>
+    </div>
+  </div>
+  <div id="flipbook"><div id="slide-inner" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div></div>
+  <div class="vignette"></div>
+  <button id="skip" class="intro-ctrl" type="button">Skip intro</button>
+  <div id="gate">
+    <small>SID LITERARY CORNER</small>
+    <b>PRESS PLAY</b>
+    <p>Sound is part of the show. Turn your volume up.</p>
+    <button id="g-snd" class="intro-ctrl" type="button">&#9654; Play intro</button>
+  </div>
+</div>
+
+<div id="page" class="wrap">
+  <nav><span>Sid Literary Corner</span><div><a href="#reading">Now Reading</a><a href="#meet">Meetings</a><a href="#shelf">Shelf</a><a href="#vote">Vote</a><a href="#card">Card</a><a href="#join">Join</a></div></nav>
+  <header class="hero">
+    <span class="l eyebrow">A book club</span>
+    <h1 class="l">Every book is<br>a destination.</h1>
+    <p class="l">Read together, talk it through, and discover where the next story takes us.</p>
+    <span class="l"><a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join the club</a></span>
+  </header>
+
+  <section id="reading" class="reveal">
+    <h2>Now reading</h2>
+    <div class="book">
+      <div class="cover"><span id="nr-cover">THE SILENT PATIENT</span><small>CURRENT PICK</small></div>
+      <div>
+        <p class="tag" id="nr-tag">This week&rsquo;s book</p>
+        <h3 id="nr-title" style="font-size:1.8rem;margin-bottom:4px">The Silent Patient</h3>
+        <p id="nr-author" style="color:var(--gold);font-size:.95rem;margin-bottom:12px">by Alex Michaelides</p>
+        <p id="nr-desc" style="color:var(--mut)">A psychological thriller about a woman who stops speaking after a shocking crime, and the therapist determined to uncover why. Finish it before the next meeting and bring your theories.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="meet" class="reveal">
+    <h2>Meetings</h2>
+    <div class="grid">
+      <div class="card"><p class="tag" id="meet-tag">Next meeting</p><h3 id="meet-when">Every Saturday &middot; 7 PM</h3><p id="meet-note">This Saturday we discuss our current pick, then everyone recommends a book for our next read.</p></div>
+      <div class="card"><p class="tag">Format</p><h3>Discuss &amp; share</h3><p>Favourite moments, big twists and honest ratings.</p></div>
+      <div class="card"><p class="tag">Pick the next</p><h3>Everyone votes</h3><p>Suggest a title and we choose together.</p></div>
+    </div>
+  </section>
+
+  <section id="shelf" class="reveal">
+    <h2>Our shelf</h2>
+    <div class="grid">
+      <div class="card"><p class="tag">Reading now</p><h3 id="shelf-title">The Silent Patient</h3><p id="shelf-author">Alex Michaelides</p></div>
+      <div class="card"><p class="tag">Up next</p><h3>Chosen by the club</h3><p>Add your recommendation below and vote for the next read.</p></div>
+      <div class="card"><p class="tag">Finished</p><h3>Past reads</h3><p>Add the books you&rsquo;ve loved so far.</p></div>
+    </div>
+  </section>
+
+  <section id="vote" class="reveal">
+    <h2>Recommend &amp; vote</h2>
+    <p style="color:var(--mut);margin-top:-14px">Suggest a book for our next read, then vote for your favourite.</p>
+    <div id="vote-live">
+      <div class="add">
+        <input id="uname" maxlength="40" placeholder="Your name (optional)" aria-label="Your name">
+        <input id="bt" maxlength="80" placeholder="Book title" aria-label="Book title">
+        <input id="ba" maxlength="60" placeholder="Author (optional)" aria-label="Author">
+        <button id="badd" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Recommend</button>
+      </div>
+      <div id="blist" class="grid" style="margin-top:22px">
+        <div class="card"><p class="tag">Alex Michaelides</p><h3>The Maidens</h3><p>Recommended by Sid</p><div class="cnt">3</div><button class="vb on" type="button">Your vote</button></div>
+        <div class="card"><p class="tag">Frank Herbert</p><h3>Dune</h3><p>Recommended by A Reader</p><div class="cnt">1</div><button class="vb" type="button">Vote</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="card" class="reveal">
+    <h2>Get your member card</h2>
+    <p style="color:var(--mut);margin-top:-14px">Generate your official Sid Literary Corner member card. Fill in your details below and download your card as a PNG image!</p>
+    <div class="card" style="margin-top:24px">
+      <div class="card-form">
+        <div class="adm-row">
+          <input id="c-name" maxlength="35" placeholder="Your Name" value="Sid">
+          <input id="c-book" maxlength="50" placeholder="Favorite Book" value="The Silent Patient">
+        </div>
+        <textarea id="c-quote" rows="2" maxlength="120" placeholder="Favorite Quote">Every book is a destination.</textarea>
+        <button id="c-gen" type="button" class="btn" style="margin:0;background:none;cursor:pointer;font-family:inherit">Generate Card</button>
+      </div>
+      <div class="card-preview-wrap">
+        <div id="tva-card-el" class="tva-card">
+          <div class="tva-header">
+            <div>
+              <div style="font-size:.6rem;letter-spacing:.3em;color:#a89e8c">SID LITERARY CORNER</div>
+              <div class="tva-logo">MEMBER CARD</div>
+            </div>
+            <div class="tva-seal">SLC<br>CLUB</div>
+          </div>
+          <div class="tva-body">
+            <div class="tva-row"><div class="tva-label">DESIGNATION</div><div id="cv-name" class="tva-val" style="font-weight:bold;letter-spacing:.05em">SID</div></div>
+            <div class="tva-row"><div class="tva-label">SACRED BOOK</div><div id="cv-book" class="tva-val">The Silent Patient</div></div>
+            <div class="tva-row"><div class="tva-label">CORE QUOTE</div><div class="tva-val"><div id="cv-quote" class="tva-quote">&ldquo;Every book is a destination.&rdquo;</div></div></div>
+          </div>
+          <div class="tva-footer">
+            <div><div style="font-size:.55rem;color:#a89e8c">MEMBER ID</div><div id="cv-id" style="font-family:monospace;letter-spacing:1px">SLC-784-99</div></div>
+            <div class="tva-barcode">||| | |||| || |</div>
+          </div>
+        </div>
+        <button id="c-download" type="button" class="btn" style="margin-top:20px;background:var(--gold);color:var(--bg);cursor:pointer;font-family:inherit">Download Card (PNG)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="reveal" style="text-align:center">
+    <h2>Join Sid Literary Corner</h2>
+    <p style="color:var(--mut);max-width:32em;margin:0 auto">New readers are always welcome. Join our WhatsApp group to get meeting updates and book picks.</p>
+    <a class="btn" href="https://chat.whatsapp.com/E4I4cmtBOjhBdQudXBFzW0?s=cl&amp;p=a&amp;iam=2" target="_blank" rel="noopener">Join on WhatsApp</a>
+  </section>
+  <footer>&copy; Sid Literary Corner</footer>
+</div>
+
+<!-- CINEMATIC INTRO & APP LOGIC -->
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  var intro=$('intro'), opened=false, playing=false, bookInterval=null;
+
+  var classics = [
+    {t: "1. Pride and Prejudice", a: "Jane Austen"},
+    {t: "2. 1984", a: "George Orwell"},
+    {t: "3. To Kill a Mockingbird", a: "Harper Lee"},
+    {t: "4. The Great Gatsby", a: "F. Scott Fitzgerald"},
+    {t: "5. Moby-Dick", a: "Herman Melville"},
+    {t: "6. War and Peace", a: "Leo Tolstoy"},
+    {t: "7. Hamlet", a: "William Shakespeare"},
+    {t: "8. The Odyssey", a: "Homer"},
+    {t: "9. Crime and Punishment", a: "Fyodor Dostoevsky"},
+    {t: "10. The Divine Comedy", a: "Dante Alighieri"},
+    {t: "11. Jane Eyre", a: "Charlotte Brontë"},
+    {t: "12. Wuthering Heights", a: "Emily Brontë"},
+    {t: "13. The Catcher in the Rye", a: "J.D. Salinger"},
+    {t: "14. One Hundred Years of Solitude", a: "Gabriel García Márquez"},
+    {t: "15. The Iliad", a: "Homer"},
+    {t: "16. Don Quixote", a: "Miguel de Cervantes"},
+    {t: "17. The Brothers Karamazov", a: "Fyodor Dostoevsky"},
+    {t: "18. Madame Bovary", a: "Gustave Flaubert"},
+    {t: "19. The Lord of the Rings", a: "J.R.R. Tolkien"},
+    {t: "20. Frankenstein", a: "Mary Shelley"},
+    {t: "21. Les Misérables", a: "Victor Hugo"},
+    {t: "22. Anna Karenina", a: "Leo Tolstoy"},
+    {t: "23. The Count of Monte Cristo", a: "Alexandre Dumas"},
+    {t: "24. Great Expectations", a: "Charles Dickens"},
+    {t: "25. The Picture of Dorian Gray", a: "Oscar Wilde"},
+    {t: "26. Brave New World", a: "Aldous Huxley"},
+    {t: "27. Lolita", a: "Vladimir Nabokov"},
+    {t: "28. Catch-22", a: "Joseph Heller"},
+    {t: "29. Little Women", a: "Louisa May Alcott"},
+    {t: "30. The Hobbit", a: "J.R.R. Tolkien"}
+  ];
+
+  /* Web Audio Synthesizer Score */
+  var ac=null, master, comp, bus, verbIn;
+  function initAudio(){
+    if(ac)return true;
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext; if(!AC)return false;
+      ac=new AC();
+      master=ac.createGain(); master.gain.value=0.6;
+      comp=ac.createDynamicsCompressor(); comp.threshold.value=-14; comp.ratio.value=12;
+      bus=ac.createGain(); bus.gain.value=0.7;
+      verbIn=ac.createGain();
+      var conv=ac.createConvolver(), n=Math.floor(ac.sampleRate*1.5), ib=ac.createBuffer(2,n,ac.sampleRate);
+      for(var ch=0;ch<2;ch++){var d=ib.getChannelData(ch);for(var i=0;i<n;i++){d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.0);}}
+      conv.buffer=ib;
+      var vw=ac.createGain(); vw.gain.value=0.4;
+      verbIn.connect(conv); conv.connect(vw); vw.connect(comp);
+      bus.connect(comp); comp.connect(master); master.connect(ac.destination);
+      return true;
+    }catch(e){ac=null;return false;}
+  }
+
+  function playTone(f, t, dur, vol){
+    if(!ac)return;
+    try{
+      var osc=ac.createOscillator(), g=ac.createGain();
+      osc.type='triangle'; osc.frequency.setValueAtTime(f, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t+0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+      osc.connect(g); g.connect(bus);
+      osc.start(t); osc.stop(t+dur+0.05);
+    }catch(e){}
+  }
+
+  function openIntro(){
+    if(opened)return; opened=true;
+    if(bookInterval) clearInterval(bookInterval);
+    intro.classList.add('open');
+    document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});
+    setTimeout(function(){document.documentElement.classList.add('go')},400);
+    setTimeout(function(){intro.classList.add('gone')},1000);
+  }
+  window.openIntro=openIntro;
+
+  function startPlay(){
+    if(playing||opened)return; playing=true;
+    $('gate').classList.add('hide');
+    if(initAudio()&&ac.state==='suspended'){ac.resume();}
+
+    setTimeout(function(){
+      intro.classList.add('zoom-in');
+      if(ac){
+        playTone(220, ac.currentTime, 1.2, 0.15);
+        playTone(330, ac.currentTime, 1.2, 0.1);
+      }
+    }, 400);
+
+    setTimeout(function(){
+      intro.classList.remove('zoom-in');
+      intro.classList.add('show-books');
+      
+      var idx=0, container=$('slide-inner');
+      function showNextBook(){
+        if(idx>=classics.length){
+          openIntro();
+          return;
+        }
+        var b=classics[idx];
+        container.innerHTML='<div class="book-slide active"><span>Classic #'+(idx+1)+' of 30</span><h3>'+b.t+'</h3><p>by '+b.a+'</p></div>';
+        if(ac){ playTone(300 + (idx*15)%400, ac.currentTime, 0.35, 0.08); }
+        idx++;
+      }
+      showNextBook();
+      bookInterval = setInterval(showNextBook, 350);
+    }, 1800);
+  }
+
+  $('g-snd').addEventListener('click',startPlay);
+  $('skip').addEventListener('click',openIntro);
+
+  /* Scroll Reveal */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+  } else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+
+  /* Member Card Generator */
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function genId(name){
+    var h=0; for(var i=0;i<name.length;i++){h=(h*31+name.charCodeAt(i))%900;}
+    return 'SLC-'+(100+h)+'-'+(10+(name.length*7)%90);
+  }
+  function updateCard(){
+    var n=($('c-name').value||'Reader').trim(), b=($('c-book').value||'Unknown').trim(), q=($('c-quote').value||'').trim();
+    $('cv-name').textContent=n.toUpperCase();
+    $('cv-book').textContent=b;
+    $('cv-quote').innerHTML='&ldquo;'+esc(q||'Every book is a destination.')+'&rdquo;';
+    $('cv-id').textContent=genId(n);
+  }
+  ['c-name','c-book','c-quote'].forEach(function(id){$(id).addEventListener('input',updateCard)});
+  $('c-gen').addEventListener('click',updateCard);
+  $('c-download').addEventListener('click',function(){
+    updateCard();
+    if(typeof html2canvas!=='function'){alert('Card downloader could not load.');return;}
+    html2canvas($('tva-card-el'),{backgroundColor:null,scale:2}).then(function(cv){
+      var a=document.createElement('a');
+      a.download='sid-literary-corner-card.png'; a.href=cv.toDataURL('image/png');
+      document.body.appendChild(a); a.click(); a.remove();
+    }).catch(function(){alert('Could not create the image.');});
+  });
+})();
+</script>
+</body>
+</html>
